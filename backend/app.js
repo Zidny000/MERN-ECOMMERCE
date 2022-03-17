@@ -26,4 +26,4 @@ app.use(errorMiddleware)
 
 
 
-module.exports.handler = serverless(app)
+module.exports = app
