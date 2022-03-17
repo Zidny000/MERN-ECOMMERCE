@@ -17,9 +17,9 @@ const order = require("./routes/orderRoute")
 app.use(express.json())
 app.use(cookieParser())
 
-app.use("/api/v1",product)
-app.use("/api/v1",user)
-app.use("api/v1/",order)
+app.use("/.netlify/functions/api/v1",product)
+app.use("/.netlify/functions/api/v1",user)
+app.use("/.netlify/functions/api/v1/",order)
 
 //Middleware for errors
 app.use(errorMiddleware)
@@ -27,3 +27,4 @@ app.use(errorMiddleware)
 
 
 module.exports = app
+module.exports.handler = serverless(app)
