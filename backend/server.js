@@ -20,6 +20,9 @@ const server = app.listen(process.env.PORT,()=>{
     console.log(`The server is running at http://localhost:${process.env.PORT}`)
 })
 
+//netlify
+
+
 
 //Unhandled Promise Rejection
 process.on("unhandledRejection",err=>{

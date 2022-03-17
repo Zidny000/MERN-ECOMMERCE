@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser")
+const serverless = require("serverless-http")
 
 const errorMiddleware = require("./middleware/error")
 
@@ -25,4 +26,4 @@ app.use(errorMiddleware)
 
 
 
-module.exports = app
+module.exports.handler = serverless(app)
