@@ -6,8 +6,10 @@ const { is } = require("express/lib/request");
 
 exports.isAuthenticatedUser = catchAsyncErrors(async (req,res,next)=>{
     
-    const token = req.headers.authorization.split(' ')[1]
-    console.log(req.headers.authorization.split(' ')[1])
+    // const token = req.headers.authorization.split(' ')[1]
+
+    const { token } = req.cookies;
+    
     
     if(!token){
         return next(new ErrorHnader("Please Login to access this resource",401))
