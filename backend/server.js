@@ -2,7 +2,7 @@ const app = require("./app");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const connectDatabase = require("./config/database")
-const serverless = require("serverless-http")
+
 
 
 //Handling Uncaught Error
@@ -17,13 +17,9 @@ dotenv.config({path:"backend/config/config.env"})
 
 //Connect to database
 connectDatabase()
-// const server = app.listen(process.env.PORT,()=>{
-//     console.log(`The server is running at http://localhost:${process.env.PORT}`)
-// })
-
-//netlify
-const server = module.exports.handler = serverless(app)
-
+const server = app.listen(process.env.PORT,()=>{
+    console.log(`The server is running at http://localhost:${process.env.PORT}`)
+})
 
 
 //Unhandled Promise Rejection
