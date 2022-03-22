@@ -4,7 +4,6 @@
   "description": "",
   "main": "backend/server.js",
   "scripts": {
-    
     "start": "npm install && node backend/server.js",
     "dev": "nodemon backend/server.js"
   },
@@ -22,6 +21,7 @@
     "netlify-lambda": "^2.0.15",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
+    "react-icon": "^1.0.0",
     "serverless-http": "^2.7.0",
     "validator": "^13.7.0"
   }
