@@ -23,6 +23,7 @@
     "nodemon": "^2.0.15",
     "react-icon": "^1.0.0",
     "serverless-http": "^2.7.0",
+    "stripe": "^8.216.0",
     "validator": "^13.7.0"
   }
 }
