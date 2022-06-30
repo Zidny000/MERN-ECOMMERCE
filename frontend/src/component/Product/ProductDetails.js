@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component"
 import ReviewCard  from "./ReviewCard"
 import Loader from "../layout/Loader/Loader"
+import MetaData from "../layout/MetaData";
 
 
 const ProductDetails = () => {
@@ -35,6 +36,7 @@ const ProductDetails = () => {
         <Fragment>
             {loading ? <Loader /> : ( 
                 <Fragment>
+                <MetaData title={`${product.name}`} />
                     <div className="ProductDetails">
                         <div>
                             <Carousel>
