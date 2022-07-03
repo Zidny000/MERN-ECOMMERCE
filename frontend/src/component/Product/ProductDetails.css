@@ -1,3 +1,9 @@
+.greenColor {
+  color:forestgreen
+}
+.redColor {
+  color:red
+}
 .ProductDetails {
     background-color: rgb(255, 255, 255);
     width: 100vw;
@@ -79,8 +85,9 @@
   
   .detailsBlock-3-1-1 > input {
     border: none;
-    padding: 0.5vmax;
-    width: 1vmax;
+    /* padding: 0.5vmax; */
+    margin-left: 15px;
+    width: 40px;
     text-align: center;
     outline: none;
     font: 400 0.8vmax "Roboto";
