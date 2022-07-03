@@ -4,19 +4,29 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const { resetWatchers } = require("nodemon/lib/monitor/watch");
+const cloudinary = require("cloudinary").v2
+
+
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-    
-    
-    const { name, email, password } = req.body;
+  const myCloud = await cloudinary.uploader.upload(req.body.avatar,
+  { folder:"avatars",
+    width:150,
+    crop:"scale"
+  }, 
+  function(error, result) {console.log(result)}
+  );
+
+
+    const { name, email, password } = req.body; 
     
     const user = await User.create({
       name,
       email,
       password,
       avtar: {
-        public_id: "public_id",
-        url:"avatar_public_id" ,
+        public_id: myCloud.public_id,
+        url:myCloud.secure_url ,
       },
     });
 
@@ -130,13 +140,35 @@ exports.updatePassword = catchAsyncErrors(async(req,res,next)=>{
 })
 
 //update profile
-exports.updateProfile = catchAsyncErrors(async(req,res,next)=>{
+exports.updateProfile = catchAsyncErrors(async(req,res,next)=>{ 
   const newUserData = {
     name:req.body.name,
     email:req.body.email
   }
-  
-  //We will add cloudinary later
+
+
+  if (req.body.avatar != 'undefined') {
+    console.log(req.body)
+    const user = await User.findById(req.user.id);
+
+    const imageId = user.avtar.public_id;
+
+    await cloudinary.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserData.avtar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
+
+
   const user =await User.findByIdAndUpdate(req.user.id,newUserData,{
     new:true,
     runValidators:true,

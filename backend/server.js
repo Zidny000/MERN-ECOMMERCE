@@ -1,6 +1,7 @@
 const app = require("./app");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cloudinary = require("cloudinary").v2
 const connectDatabase = require("./config/database")
 
 
@@ -17,6 +18,24 @@ dotenv.config({path:"backend/config/config.env"})
 
 //Connect to database
 connectDatabase()
+
+
+// cloudianry.config({
+//     cloud_name:process.env.CLOUDINARY_NAME,
+//     api_key: process.env.CLOUDINARY_API_KEY,
+//     api_secret: process.env.CLOUDINARY_API_SECRET
+
+// })
+
+cloudinary.config({ 
+    cloud_name: 'ztcloud', 
+    api_key: '538521371714285', 
+    api_secret: 'PUXJ-pO-RREUEdLtOxVJXBJAqx8' 
+  });
+
+ 
+
+
 const server = app.listen(process.env.PORT,()=>{
     console.log(`The server is running at http://localhost:${process.env.PORT}`)
 })
