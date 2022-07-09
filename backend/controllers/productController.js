@@ -100,13 +100,15 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 })
 //Create Product Review
 exports.createProductReview = catchAsyncErrors(async(req,res,next)=>{
-  const {rating,commnet,productId} = req.body
+  
+  const {rating,comment,productId} = req.body
   const review = {
     user:req.user._id,
-    name:user.user.name,
+    name:req.user.name,
     rating:Number(rating),
-    commnet
+    comment
   }
+  console.log(review)
   const  product = await Product.findById(productId)
 
   const isReviewed = product.reviews.find(rev=>rev.user.toString()===req.user._id)
@@ -115,7 +117,7 @@ exports.createProductReview = catchAsyncErrors(async(req,res,next)=>{
     product.reviews.forEach(rev=>{
       if(rev.user.toString()===req.user._id.toString){
         rev.rating=rating,
-        rev.comment=commnet
+        rev.comment=comment
       }
     })
   }else{
@@ -123,9 +125,7 @@ exports.createProductReview = catchAsyncErrors(async(req,res,next)=>{
     product.numOfReviews = product.reviews.length
   }
 
-
-
-  let avg=0;
+  let avg=4;
   product.ratings = product.reviews.forEach(rev=>{
     avg=avg+rev.rating;
   })/product.reviews.length

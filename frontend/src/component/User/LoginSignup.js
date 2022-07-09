@@ -82,7 +82,8 @@ const LoginSignUp = () => {
     }
 
     if (isAuthenticated) {
-      navigate(redirect);
+      console.log(redirect)
+      navigate('/'+redirect);
 
     }
   }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
