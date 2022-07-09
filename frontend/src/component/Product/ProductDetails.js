@@ -4,7 +4,6 @@ import "./ProductDetails.css"
 import {useSelector,useDispatch} from "react-redux"
 import { clearErrors, getProductDetails,newReview } from "../../actions/productAction"
 import { useParams } from 'react-router-dom';
-import ReactStars from "react-rating-stars-component"
 import ReviewCard  from "./ReviewCard"
 import Loader from "../layout/Loader/Loader"
 import MetaData from "../layout/MetaData";
@@ -30,7 +29,6 @@ const ProductDetails = () => {
 
 
     const options = {
-        size: "large",
         value: product.ratings,
         readOnly: true,
         precision: 0.5,
@@ -127,7 +125,7 @@ const ProductDetails = () => {
                             <p>Product # {product._id}</p>
                         </div>
                         <div className="detailsBlock-2">
-                            <ReactStars {...options} />
+                            <Rating {...options} />
                             <span className="detailsBlock-2-span">
                             ({product.numOfReviews} Reviews)
                             
