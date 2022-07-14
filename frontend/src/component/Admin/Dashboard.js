@@ -8,7 +8,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
-import MetaData from "../layout/MetaData";
+import MetaData from "../layout/MetaData"; 
+
+import { Chart as ChartJS, registerables } from 'chart.js';
+ChartJS.register(...registerables);
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ const Dashboard = () => {
     orders.forEach((item) => {
       totalAmount += item.totalPrice;
     });
-
+    console.log(totalAmount)
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -47,7 +50,7 @@ const Dashboard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, totalAmount],
+        data: [0, 34745],
       },
     ],
   };

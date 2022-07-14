@@ -28,7 +28,7 @@ import Payment from "./component/Cart/Payment.js"
 import OrderSuccess from "./component/Cart/OrderSuccess.js"
 import MyOrder from "./component/Order/MyOrder.js"
 import OrderDetails from './component/Order/OrderDetails.js';
-import Dashboard from './component/admin/Dashboard.js'
+import Dashboard from './component/Admin/Dashboard.js'
 import ProductList from './component/Admin/ProductList.js'
 import UpdateProduct from './component/Admin/UpdateProduct.js'
 import OrderList from './component/Admin/OrderList';
