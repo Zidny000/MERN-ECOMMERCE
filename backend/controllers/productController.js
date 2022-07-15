@@ -19,6 +19,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     
   }
 
+
   const imagesLinks = [];
 
   
@@ -39,8 +40,12 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
   console.log(req.body)
   
+  if(imagesLinks.length == 0){
+    req.body.images = { ublic_id: "No Images", url: "No Image URL", }
+  }else{
+    req.body.images = imagesLinks;
+  }
 
-  req.body.images = imagesLinks;
 
   req.body.user = req.user.id
   

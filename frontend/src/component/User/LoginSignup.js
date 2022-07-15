@@ -73,17 +73,18 @@ const LoginSignUp = () => {
     }
   };
 
-  const redirect = location.search ? location.search.split("=")[1] : "/account";
+  const redirect = location.search ? location.search.split("=")[1] : "account";
 
   useEffect(() => {
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isAuthenticated) {
-      console.log(redirect)
-      navigate('/'+redirect);
+      
+      navigate(`/${redirect}`);
 
     }
   }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
