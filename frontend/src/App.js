@@ -92,7 +92,7 @@ function App() {
     <ProtectedRoute exact path="/success" element={<OrderSuccess />} />
     <ProtectedRoute exact path="/orders" element={<MyOrder />} />
     
-    <ProtectedRoute exact path="/order/confirm" element={<ConfirmOrder />} />
+    <ProtectedRoute exact path="/orders/confirm" element={<ConfirmOrder />} />
     <ProtectedRoute exact path="/order/:id" element={<OrderDetails />} />
 
 
