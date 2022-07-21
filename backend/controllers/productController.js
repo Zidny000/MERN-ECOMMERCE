@@ -7,19 +7,19 @@ const cloudinary = require("cloudinary").v2
 //create product --Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
-  
+
   let images = [];
 
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
   } else {
-    if(req.body.images != undefined){
+    if(req.body.images != undefined){ 
       images = req.body.images;
     }
     
   }
-
-
+  
+  
   const imagesLinks = [];
 
   
@@ -28,28 +28,31 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     
     const myCloud = await cloudinary.uploader.upload(images[i], {
       folder: "products",
+      width:200,
+      crop:"scale"
     },
-    function(error, result) {console.log(error)}
-    );
-
-    imagesLinks.push({
-      public_id: result.public_id,
-      url: result.secure_url,
+    function(error, result) {
+      console.log(error)
+      imagesLinks.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
     });
+    
   }
 
-  console.log(req.body)
   
   if(imagesLinks.length == 0){
-    req.body.images = { ublic_id: "No Images", url: "No Image URL", }
-  }else{
+    req.body.images = [{ public_id: "No Images", url: "No Image URL", }]
+  }else{ 
     req.body.images = imagesLinks;
   }
 
-
-  req.body.user = req.user.id
   
-  const product = await Product.create(req.body);
+  req.body.user = req.user.id
+
+  const product = await Product.create(req.body,function(error,result) {console.log(error)});
+  console.log(product)
  
    res.status(201).json({
      success: true,

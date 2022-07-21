@@ -2,6 +2,7 @@ import {
     ADD_TO_CART,
     REMOVE_CART_ITEM,
     SAVE_SHIPPING_INFO,
+    REMOVE_ALL_CART_ITEMS,
   } from "../constants/cartConstants";
   import axios from "axios";
   
@@ -33,6 +34,14 @@ import {
   
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
   };
+
+  //REMOVE ALL CART ITEMS
+  export const removeAllCartItems = () => async (dispatch) => {
+    dispatch({
+      type:REMOVE_ALL_CART_ITEMS,
+    })
+    localStorage.removeItem("cartItems");
+  }
   
   // SAVE SHIPPING INFO
   export const saveShippingInfo = (data) => async (dispatch) => {
