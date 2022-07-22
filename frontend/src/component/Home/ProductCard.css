@@ -1,0 +1,41 @@
+.product a {
+    overflow: hidden;
+  }
+  
+.product img {
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+  
+.product img:hover {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  
+  .owl-nav button {
+    position: absolute;
+    top: 20%;
+    outline: none;
+  }
+  
+  .owl-nav button.owl-prev {
+    left: 0;
+  }
+  
+  .owl-nav button.owl-prev span {
+    font-size: 35px;
+    color: #003859;
+    margin-left: -3rem;
+    padding: 0 .1rem;
+  }
+  
+  .owl-nav button.owl-next {
+    right: 0;
+  }
+  
+  .owl-nav button.owl-next span {
+    font-size: 35px;
+    color: #003859;
+    margin-right: -3rem;
+    padding: 0 .1rem;
+  }

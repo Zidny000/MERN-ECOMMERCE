@@ -69,7 +69,20 @@
     justify-content: center;
     max-width: 100%;
   }
-  
+
+  .itemContainer{
+    display: flex;
+    justify-content: center;
+  }
+
+  .items{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80vw;
+  }
+
+
   .productCard {
     width: 14vmax;
     display: flex;
@@ -79,6 +92,8 @@
     margin: 2vmax;
     transition: all 0.5s;
     padding-bottom: 0.5vmax;
+    align-items: center;
+    /* font-family: "Raleway"; */ 
   }
   
   .productCard > img {
@@ -99,22 +114,51 @@
   
   .productCard > p {
     font-family: "Roboto";
-    font-size: 1.2vmax;
+    font-size: 1.4vmax;
     margin: 1vmax 0.5vmax;
     margin-bottom: 0;
+    font-weight: lighter;
   }
   
   .productCard > span {
     margin: 0.5vmax;
     color: tomato;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    font-size: 1vmax;
+    font-size: 1.2vmax;
   }
   
   .productCard:hover {
     box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
   
     transform: translateY(-1vmax);
+  }
+
+  .owl-nav button {
+    position: absolute;
+    top: 35%;
+    outline: none;
+  }
+  
+  .owl-nav button.owl-prev {
+    left: 0;
+  }
+  
+  .owl-nav button.owl-prev span {
+    font-size: 35px;
+    color: #003859;
+    margin-left: -3rem;
+    padding: 0 .1rem;
+  }
+  
+  .owl-nav button.owl-next {
+    right: 0;
+  }
+  
+  .owl-nav button.owl-next span {
+    font-size: 35px;
+    color: #003859;
+    margin-right: -3rem;
+    padding: 0 .1rem;
   }
   
   @media screen and (max-width: 600px) {

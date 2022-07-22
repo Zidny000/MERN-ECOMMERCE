@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import { Rating } from '@material-ui/lab'
 
 
+
 const ProductCard = ({product}) =>{
     const options = {
         size:"small",
@@ -19,7 +20,22 @@ const ProductCard = ({product}) =>{
 
             </div>
             <span> ({product.numOfReviews} Reviews)</span>
-            <span>${product.price}</span>
+            <span>${product.price}</span> 
+{/* 
+            <div className="product font-rale">
+                <a href="/"><img src={product.images[0].url} className="img-fluid" alt={product.name} /></a>
+                <div className="text-center">
+                <h6>{product.name}</h6>
+                <div className="rating text-warning font-size-12">
+                    <Rating {...options} /> 
+                </div>
+                <div className="price py-2">
+                    <span>${product.price}</span>
+                    
+                </div>
+    
+                </div>
+            </div> */}
         </Link>
        
     )

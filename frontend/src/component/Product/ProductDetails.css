@@ -19,7 +19,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    padding: 2vmax;
+    padding: 1vmax;
     box-sizing: border-box;
     border: 1px solid white;
   }
@@ -27,19 +27,21 @@
   .ProductDetails > div:last-child {
     align-items: flex-start;
   }
-  
-  .CarouselImage {
-    width: 20vmax;
+
+
+  .owl-item{
+    display: flex;
+    justify-content: center;
   }
   
   .detailsBlock-1 > h2 {
     color: rgb(54, 54, 54);
-    font: 600 1.6vmax "Roboto";
+    font: 600 2vmax "Roboto";
   }
   
   .detailsBlock-1 > p {
     color: rgba(54, 54, 54, 0.582);
-    font: 200 0.6vmax cursive;
+    font: 200 1.1vmax cursive;
   }
   
   .detailsBlock-2 {
@@ -53,7 +55,7 @@
   }
   
   .detailsBlock-2-span {
-    font: 200 0.8vmax cursive;
+    font: 200 1vmax cursive;
     color: rgba(0, 0, 0, 0.699);
   }
   
@@ -90,7 +92,7 @@
     width: 40px;
     text-align: center;
     outline: none;
-    font: 400 0.8vmax "Roboto";
+    font: 400 1vmax "Roboto";
     color: rgba(0, 0, 0, 0.74);
   }
   
@@ -100,9 +102,9 @@
     color: white;
     transition: all 0.5s;
     background-color: tomato;
-    font: 500 0.7vmax "Roboto";
+    font: 500 1vmax "Roboto";
     border-radius: 20px;
-    padding: 0.5vmax 2vmax;
+    padding: 1vmax 3vmax;
     margin: 1vmax;
     outline: none;
   }
@@ -116,26 +118,26 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.205);
     padding: 1vmax 0;
     color: rgba(0, 0, 0, 0.651);
-    font: 400 1vmax "Roboto";
+    font: 400 1.3vmax "Roboto";
     margin: 1vmax 0;
   }
   
   .detailsBlock-4 {
     color: rgba(0, 0, 0, 0.897);
-    font: 500 1.2vmax sans-serif;
+    font: 500 1.5vmax sans-serif;
   }
   
   .detailsBlock-4 > p {
     color: rgba(0, 0, 0, 0.534);
-    font: 300 0.8vmax sans-serif;
+    font: 300 1.1vmax sans-serif;
   }
   
   .submitReview {
     border: none;
     background-color: tomato;
-    font: 500 0.7vmax "Roboto";
+    font: 500 1vmax "Roboto";
     border-radius: 20px;
-    padding: 0.6vmax 2vmax;
+    padding: .9vmax 2vmax;
     margin: 1vmax 0;
     color: white;
     cursor: pointer;

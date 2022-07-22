@@ -1,5 +1,4 @@
 import {Fragment,useEffect,useState} from "react"
-import Carousel from "react-material-ui-carousel"
 import "./ProductDetails.css"
 import {useSelector,useDispatch} from "react-redux"
 import { clearErrors, getProductDetails,newReview } from "../../actions/productAction"
@@ -12,6 +11,9 @@ import { useAlert } from "react-alert";
 import { Dialog,DialogActions,DialogContent,DialogTitle,Button} from "@material-ui/core"
 import { Rating } from "@material-ui/lab";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
+import ReactOwlCarousel from "react-owl-carousel"
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 
 const ProductDetails = () => {
@@ -21,6 +23,13 @@ const ProductDetails = () => {
     const { product, loading, error } = useSelector(
         (state) => state.productDetails
     );
+
+    const options2 = {
+        nav:false,
+        dots:true,
+        center:true,
+        items:1
+      }
 
 
     const { success, error: reviewError } = useSelector(
@@ -41,9 +50,13 @@ const ProductDetails = () => {
 
 
     const increaseQuantity = () => {
-        if(product.stock <= quantity) return
-        const qty = quantity + 1
-        setQuantity(qty)
+        if(product.Stock <= quantity){
+            return
+        }else{
+            const qty = quantity + 1
+            setQuantity(qty)
+        }
+       
     }
 
     const decreaseQuantity = () => {
@@ -105,8 +118,8 @@ const ProductDetails = () => {
                 <Fragment>
                 <MetaData title={`${product.name}`} />
                     <div className="ProductDetails">
-                        <div>
-                            <Carousel>
+                        {/* <div>
+
                                 {product.images &&
                                 product.images.map((item, i) => (
                                     <img
@@ -116,8 +129,25 @@ const ProductDetails = () => {
                                     alt={`${i} Slide`}
                                     />
                                 ))}
-                            </Carousel>
+
+                        </div> */}
+
+                        <div>
+                             <ReactOwlCarousel className='owl-carousel owl-theme owl-loaded owl-drag' {...options2}>
+                            {product.images &&
+                                product.images.map((item, i) => (
+                                    <img
+                                    className="CarouselImage"
+                                    style={{width:'25vmax'}}
+                                    key={i}
+                                    src={item.url}
+                                    alt={`${i} Slide`}
+                                    />
+                                ))}
+                            </ReactOwlCarousel>
                         </div>
+                           
+             
                     
                         <div>
                         <div className="detailsBlock-1">
@@ -132,7 +162,7 @@ const ProductDetails = () => {
                             </span>
                         </div>
                         <div className="detailsBlock-3">
-                            <h1>{`₹${product.price}`}</h1>
+                            <h1>{`$${product.price}`}</h1>
                             <div className="detailsBlock-3-1">
                             <div className="detailsBlock-3-1-1">
                                 <button onClick={decreaseQuantity}>-</button>

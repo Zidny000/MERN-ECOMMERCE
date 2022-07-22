@@ -1,44 +1,27 @@
 import React from "react";
-import { ReactNavbar } from "overlay-navbar";
-import logo from "../../../images/logo.png";
-
-const options = {
-
-    burgerColor: "#eb4034",
-    logo,
-    logoWidth: "20vmax",
-    navColor1: "white",
-    logoHoverSize: "10px",
-    logoHoverColor: "#eb4034",
-    link1Text: "Home",
-    link2Text: "Products",
-    link3Text: "Contact",
-    link4Text: "About",
-    link1Url: "/",
-    link2Url: "/products",
-    link3Url: "/contact",
-    link4Url: "/about",
-    link1Size: "1.3vmax",
-    link1Color: "rgba(35, 35, 35,0.8)",
-    nav1justifyContent: "flex-end",
-    nav2justifyContent: "flex-end",
-    nav3justifyContent: "flex-start",
-    nav4justifyContent: "flex-start",
-    link1ColorHover: "#eb4034",
-    link1Margin: "1vmax",
-    profileIconUrl: "/login",
-    profileIconColor: "rgba(35, 35, 35,0.8)",
-    searchIconColor: "rgba(35, 35, 35,0.8)",
-    cartIconColor: "rgba(35, 35, 35,0.8)",
-    profileIconColorHover: "#eb4034",
-    searchIconColorHover: "#eb4034",
-    cartIconColorHover: "#eb4034",
-    cartIconMargin: "1vmax",
-  };
-  
 
 const Header = () =>{
-    return <ReactNavbar  {...options} />
+    return(
+      <div className="navigation">
+        <input type="checkbox" className="navigation__checkbox" id="navi-toggle" />
+        <label for="navi-toggle" className="navigation__button">
+          <span className="navigation__icon">
+            &nbsp;
+          </span>
+        </label>
+        
+        <div className="navigation__background">&nbsp;</div>
+          <nav className="navigation__nav">
+            <ul className="navigation__list">					
+              <li className="navigation__item"><a href="/" className="navigation__link">Home</a></li>
+              <li className="navigation__item"><a href="/" className="navigation__link">Shop</a></li>
+              <li className="navigation__item"><a href="/" className="navigation__link">Login</a></li>
+              <li className="navigation__item"><a href="/" className="navigation__link">Register</a></li>
+            </ul>
+          </nav>
+        
+      </div>
+    )
 
 }
 export default Header;
