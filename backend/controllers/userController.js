@@ -79,6 +79,7 @@ exports.logout = catchAsyncErrors(async (req,res,next)=>{
 //Forgot Password
 exports.forgetPassword = catchAsyncErrors(async (req,res,next)=>{
   const user = await User.findOne({email:req.body.email});
+  
   if(!user){
     return next(new ErrorHander("User not found",404))
   }
@@ -148,7 +149,6 @@ exports.updateProfile = catchAsyncErrors(async(req,res,next)=>{
 
 
   if (req.body.avatar != 'undefined') {
-    console.log(req.body)
     const user = await User.findById(req.user.id);
 
     const imageId = user.avtar.public_id;
