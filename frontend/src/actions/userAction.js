@@ -156,6 +156,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 // Reset Password
 export const resetPassword = (token, passwords) => async (dispatch) => {
   try {
+
     dispatch({ type: RESET_PASSWORD_REQUEST });
 
     const config = { headers: { "Content-Type": "application/json" } };

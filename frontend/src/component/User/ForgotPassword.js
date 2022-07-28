@@ -23,6 +23,7 @@ const ForgotPassword = () => {
     const myForm = new FormData();
 
     myForm.set("email", email);
+
     dispatch(forgotPassword(myForm));
   };
 
