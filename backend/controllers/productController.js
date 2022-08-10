@@ -3,9 +3,15 @@ const ErrorHnader = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary").v2
+const storage = require("../config/firebase")
+const { ref, uploadString,getDownloadURL} = require("firebase/storage");
+
+
 
 //create product --Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+
+
 
 
   let images = [];
@@ -23,41 +29,58 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   const imagesLinks = [];
 
   
+  
+  // const imagesRef = ref(storage);
 
-  for (let i = 0; i < images.length; i++) {
+  
+  // for (let i = 0; i < images.length; i++) {
+    const storageRef = ref(storage, 'images/'+req.body.name+'.png');
     
-    const myCloud = await cloudinary.uploader.upload(images[i], {
-      folder: "products",
-      width:200,
-      crop:"scale"
-    },
-    function(error, result) {
-      console.log(error)
-      imagesLinks.push({
-        public_id: result.public_id,
-        url: result.secure_url,
+    const upload = uploadString(storageRef,images[0].split(',')[1], "base64", {contentType: 'image/png'}).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        imagesLinks.push({
+          public_id: snapshot.metadata.md5Hash,
+          url: url,
+        });
+
+        if(imagesLinks.length == 0){
+          req.body.images = [{ public_id: "No Images", url: "No Image URL", }]
+        }else{ 
+          req.body.images = imagesLinks;
+        }
+      
+        
+        req.body.user = req.user.id
+      
+        const product = Product.create(req.body,function(error,result) {
+          console.log(error)
+           res.status(201).json({
+           success: true,
+           product,
+          });
+        });
+      
+        
       });
     });
+
+  //   const myCloud = await cloudinary.uploader.upload(images[i], {
+  //     folder: "products",
+  //     width:200,
+  //     crop:"scale"
+  //   },
+  //   function(error, result) {
+  //     console.log(error)
+  //     imagesLinks.push({
+  //       public_id: result.public_id,
+  //       url: result.secure_url,
+  //     });
+  //   });
     
-  }
+  // }
 
   
-  if(imagesLinks.length == 0){
-    req.body.images = [{ public_id: "No Images", url: "No Image URL", }]
-  }else{ 
-    req.body.images = imagesLinks;
-  }
-
   
-  req.body.user = req.user.id
-
-  const product = await Product.create(req.body,function(error,result) {console.log(error)});
-  console.log(product)
- 
-   res.status(201).json({
-     success: true,
-     product,
-   });
  });
   
 // Get All Product
