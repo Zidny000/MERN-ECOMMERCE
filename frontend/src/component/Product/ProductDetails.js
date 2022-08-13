@@ -23,6 +23,7 @@ const ProductDetails = () => {
     const { product, loading, error } = useSelector(
         (state) => state.productDetails
     );
+    
 
     const options2 = {
         nav:false,
@@ -110,7 +111,6 @@ const ProductDetails = () => {
         dispatch(getProductDetails(id));
     },[dispatch,id,error,alert,reviewError, success]) 
 
-
     
     return (
         <Fragment>
@@ -135,15 +135,18 @@ const ProductDetails = () => {
                         <div>
                              <ReactOwlCarousel className='owl-carousel owl-theme owl-loaded owl-drag' {...options2}>
                             {product.images &&
+                            
                                 product.images.map((item, i) => (
                                     <img
                                     className="CarouselImage"
                                     style={{width:'25vmax'}}
                                     key={i}
-                                    src={item.url}
+                                    src={product.images[0].url}
                                     alt={`${i} Slide`}
                                     />
-                                ))}
+                                ))
+                                
+                                }
                             </ReactOwlCarousel>
                         </div>
                            
