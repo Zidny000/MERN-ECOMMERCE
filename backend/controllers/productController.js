@@ -11,9 +11,6 @@ const { ref, uploadString,getDownloadURL} = require("firebase/storage");
 //create product --Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
-
-
-
   let images = [];
 
   if (typeof req.body.images === "string") {
@@ -29,14 +26,13 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   const imagesLinks = [];
 
   
-  
   // const imagesRef = ref(storage);
 
   
-  // for (let i = 0; i < images.length; i++) {
-    const storageRef = ref(storage, 'images/'+req.body.name+'.png');
+  for (let i = 0; i < images.length; i++) {
+    const storageRef = ref(storage, 'images/'+req.body.name+i+'.png');
     
-    const upload = uploadString(storageRef,images[0].split(',')[1], "base64", {contentType: 'image/png'}).then((snapshot) => {
+    const upload = uploadString(storageRef,images[i].split(',')[1], "base64", {contentType: 'image/png'}).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         imagesLinks.push({
           public_id: snapshot.metadata.md5Hash,
@@ -77,7 +73,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   //     });
   //   });
     
-  // }
+  }
 
   
   

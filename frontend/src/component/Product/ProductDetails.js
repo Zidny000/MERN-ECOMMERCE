@@ -132,7 +132,7 @@ const ProductDetails = () => {
 
                         </div> */}
 
-                        <div>
+                        <div className="DetailsImage">
                              <ReactOwlCarousel className='owl-carousel owl-theme owl-loaded owl-drag' {...options2}>
                             {product.images &&
                             

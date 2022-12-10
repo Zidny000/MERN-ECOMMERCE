@@ -23,7 +23,9 @@
     box-sizing: border-box;
     border: 1px solid white;
   }
-  
+  .ProductDetails > div:first-child{
+    width: 50vw;
+  }
   .ProductDetails > div:last-child {
     align-items: flex-start;
   }

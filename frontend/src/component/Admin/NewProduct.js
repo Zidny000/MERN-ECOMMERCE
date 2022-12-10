@@ -68,13 +68,14 @@ const NewProduct = () => {
       myForm.append("images", image);
     });
     dispatch(createProduct(myForm));
+    setImages([]);
+    setImagesPreview([]);
   };
+
+  
 
   const createProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
-
-    setImages([]);
-    setImagesPreview([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -164,6 +165,7 @@ const NewProduct = () => {
                 accept="image/*"
                 onChange={createProductImagesChange}
                 multiple
+                required
               />
             </div>
 
