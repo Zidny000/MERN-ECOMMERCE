@@ -73,8 +73,13 @@
     left: 4vmax;
   }
   
+  .setPriceButton{
+    margin-bottom: 10px;
+  }
+
   .categoryBox {
     padding: 0%;
+    
   }
   
   .category-link {

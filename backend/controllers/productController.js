@@ -5,6 +5,7 @@ const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary").v2
 const storage = require("../config/firebase")
 const { ref, uploadString,getDownloadURL} = require("firebase/storage");
+const { update } = require("../models/productModel");
 
 
 
@@ -49,7 +50,6 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
         req.body.user = req.user.id
       
         const product = Product.create(req.body,function(error,result) {
-          console.log(error)
            res.status(201).json({
            success: true,
            product,
@@ -146,48 +146,54 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   if (typeof req.body.images === "string") {
     images.push(req.body.images);
   } else {
-    images = req.body.images;
-  }
-
-  if(images !== undefined){
-
-    for(let i=0;i<product.images.length;i++){
-      const result = await cloudinary.uploader.destroy(
-        product.images[i].public_id
-      )
+    if(req.body.images != undefined){ 
+      images = req.body.images;
     }
+  } 
+
+  if(images.length > 0 ){
 
     const imagesLinks = [];
 
     for (let i = 0; i < images.length; i++) {
-      const result = await cloudinary.uploader.upload(images[i], {
-        folder: "products",
-      });
+      const storageRef = ref(storage, 'images/'+req.body.name+i+'.png');
+      
+      const upload = uploadString(storageRef,images[i].split(',')[1], "base64", {contentType: 'image/png'}).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          imagesLinks.push({
+            public_id: snapshot.metadata.md5Hash,
+            url: url,
+          });
 
-      imagesLinks.push({
-        public_id: result.public_id,
-        url: result.secure_url,
+          req.body.images = imagesLinks;
+        
+          if(images.length == imagesLinks.length){
+           up()
+          }
+        
+        });
       });
     }
 
-    req.body.images = imagesLinks;
-
+  }else{
+    req.body.images = product.images
+    up()
   }
 
-
-
-
-
-  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-    useFindAndModify: false,
-  });
-
-  res.status(200).json({
-    success: true,
-    product,
-  });
+  async function up (){
+    req.body.user = req.user.id
+    console.log(req.body)
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    });
+  
+    res.status(200).json({
+      success: true,
+      product,
+    });
+  }
 
 })
 

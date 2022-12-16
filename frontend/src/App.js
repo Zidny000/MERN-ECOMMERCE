@@ -12,7 +12,7 @@ import Products from "./component/Product/Products.js"
 import Search from "./component/Product/Search.js"
 import LoginSignUp from './component/User/LoginSignup';
 import store from "./store"
-import { loadUser } from './actions/userAction';
+import { loadUser,clearErrors } from './actions/userAction';
 import UserOptions from "./component/layout/Header/UserOptions.js"
 import { useSelector } from 'react-redux';
 import Profile from "./component/User/Profile.js"
@@ -47,7 +47,7 @@ import {loadStripe} from "@stripe/stripe-js"
 
 function App() {
 
-  const {isAuthenticated, user} = useSelector((state)=>state.user)
+  const {isAuthenticated, user,error} = useSelector((state)=>state.user)
   const [stripeApiKey,setStripeApiKey] = useState("");
 
   async function getStripeApiKey(){
@@ -61,8 +61,11 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+    
     store.dispatch(loadUser())
+    
     getStripeApiKey()
+    console.log(isAuthenticated)
   },[]) 
   return (
   <Router>
@@ -95,7 +98,6 @@ function App() {
     <ProtectedRoute exact path="/orders/confirm" element={<ConfirmOrder />} />
     <ProtectedRoute exact path="/order/:id" element={<OrderDetails />} />
 
-
     <ProtectedRoute isAdmin={true} exact path="/admin/dashboard" element={<Dashboard />} />
     <ProtectedRoute isAdmin={true} exact path="/admin/products" element={<ProductList />} />
     <ProtectedRoute isAdmin={true} exact path="/admin/product" element={<NewProduct />} />
@@ -106,9 +108,6 @@ function App() {
     <ProtectedRoute isAdmin={true} exact path="/admin/user/:id" element={<UpdateUser />} />
     <ProtectedRoute isAdmin={true} exact path="/admin/reviews" element={<ProductReviews />} />
     <ProtectedRoute isAdmin={true} exact path="/admin/users" element={<UserList />} />
-
-
-
 
     <Footer />
   </Router>

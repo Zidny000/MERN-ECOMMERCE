@@ -6,34 +6,54 @@ const sendEmail = require("../utils/sendEmail");
 const { resetWatchers } = require("nodemon/lib/monitor/watch");
 const cloudinary = require("cloudinary").v2
 const crypto = require("crypto")
+const storage = require("../config/firebase")
+const { ref, uploadString,getDownloadURL} = require("firebase/storage");
+const { async } = require("@firebase/util");
 
 
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  const myCloud = await cloudinary.uploader.upload(req.body.avatar,
-  { folder:"avatars",
-    width:150,
-    crop:"scale"
-  }, 
-  function(error, result) {console.log(result)}
-  );
 
+  const { name, email, password, avatar } = req.body; 
+  console.log(avatar)
 
-    const { name, email, password } = req.body; 
+  if(avatar === "/Profile.png") {
+    try{
+      const user = await User.create({
+        name,
+        email,
+        password
+      })
+      sendToken(user,201,res);
+    }catch(error){
+      return next(new ErrorHander(error.message,500))
+    }
+  }else{
+    const storageRef = ref(storage, 'user-images/'+name+'.png');
     
-    const user = await User.create({
-      name,
-      email,
-      password,
-      avtar: {
-        public_id: myCloud.public_id,
-        url:myCloud.secure_url ,
-      },
+    const upload = uploadString(storageRef,avatar.split(',')[1], "base64", {contentType: 'image/png'}).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then(async(url) => {
+        try{
+          const user = await User.create({
+            name,
+            email,
+            password,
+            avtar: {
+              public_id: snapshot.metadata.md5Hash,
+              url: url,
+            },
+          })
+          sendToken(user,201,res);
+        }catch(error){
+          return next(new ErrorHander(error.message,500))
+        }
+    
+      });
     });
+  }
+  
 
-    sendToken(user,201,res);
-
-  });
+});
 
 //Login user
 exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
@@ -138,7 +158,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHander("Password does not password", 400));
+    return next(new ErrorHander("Password does not match", 400));
   }
 
   user.password = req.body.password;
@@ -205,7 +225,6 @@ exports.updateProfile = catchAsyncErrors(async(req,res,next)=>{
   }
 
 
-
   const user =await User.findByIdAndUpdate(req.user.id,newUserData,{
     new:true,
     runValidators:true,
@@ -217,7 +236,6 @@ exports.updateProfile = catchAsyncErrors(async(req,res,next)=>{
     success:true
   })
 
-  
 })
 
 //get all user(admin)

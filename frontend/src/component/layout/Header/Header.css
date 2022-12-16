@@ -167,14 +167,14 @@
 }
 
 .navigation__checkbox:checked + .navigation__button .navigation__icon::before {
-  background-color: #fff;
+  background-color: rgb(189, 36, 36);;
   top: 0;
   -webkit-transform: rotate(135deg);
           transform: rotate(135deg);
 }
 
 .navigation__checkbox:checked + .navigation__button .navigation__icon::after {
-  background-color: #fff;
+  background-color: rgb(189, 36, 36);
   top: 0;
   -webkit-transform: rotate(-135deg);
           transform: rotate(-135deg);
