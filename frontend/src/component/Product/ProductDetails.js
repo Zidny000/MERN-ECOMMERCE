@@ -141,7 +141,7 @@ const ProductDetails = () => {
                                     className="CarouselImage"
                                     style={{width:'25vmax'}}
                                     key={i}
-                                    src={product.images[0].url}
+                                    src={product.images[i].url}
                                     alt={`${i} Slide`}
                                     />
                                 ))

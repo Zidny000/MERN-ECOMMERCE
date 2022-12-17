@@ -15,7 +15,7 @@ const { async } = require("@firebase/util");
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
   const { name, email, password, avatar } = req.body; 
-  console.log(avatar)
+
 
   if(avatar === "/Profile.png") {
     try{

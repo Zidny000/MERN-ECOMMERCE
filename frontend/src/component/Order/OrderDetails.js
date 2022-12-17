@@ -40,7 +40,7 @@ const OrderDetails = ({ match }) => {
               <div className="orderDetailsContainerBox">
                 <div>
                   <p>Name:</p>
-                  <span>{order.user && order.user.name}</span>
+                  <span>{order.userName && order.userName}</span>
                 </div>
                 <div>
                   <p>Phone:</p>
@@ -107,8 +107,8 @@ const OrderDetails = ({ match }) => {
                         {item.name}
                       </Link>{" "}
                       <span>
-                        {item.quantity} X ₹{item.price} ={" "}
-                        <b>₹{item.price * item.quantity}</b>
+                        {item.quantity} X ${item.price} ={" "}
+                        <b>${item.price * item.quantity}</b>
                       </span>
                     </div>
                   ))}

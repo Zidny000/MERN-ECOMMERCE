@@ -21,7 +21,7 @@ const ProcessOrder = () => {
   const {id} = useParams();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.order);
-
+  console.log(order)
   const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -75,7 +75,7 @@ const ProcessOrder = () => {
                   <div className="orderDetailsContainerBox">
                     <div>
                       <p>Name:</p>
-                      <span>{order.user && order.user.name}</span>
+                      <span>{order.userName && order.userName}</span>
                     </div>
                     <div>
                       <p>Phone:</p>
@@ -142,8 +142,8 @@ const ProcessOrder = () => {
                             {item.name}
                           </Link>{" "}
                           <span>
-                            {item.quantity} X ₹{item.price} ={" "}
-                            <b>₹{item.price * item.quantity}</b>
+                            {item.quantity} X ${item.price} ={" "}
+                            <b>${item.price * item.quantity}</b>
                           </span>
                         </div>
                       ))}

@@ -13,6 +13,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     taxPrice,
     shippingPrice,
     totalPrice,
+    userName
   } = req.body;
 
   const order = await Order.create({
@@ -23,6 +24,7 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
     taxPrice,
     shippingPrice,
     totalPrice,
+    userName,
     paidAt: Date.now(),
     user: req.user._id,
   });
